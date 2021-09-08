@@ -11,6 +11,18 @@ let len = 3; //초기 배열의 크기
 
 let direction = "right"; //초기 플레이어의 움직임 방향
 
+let item = { //아이템의 좌표를 계산하는데 이용될 객체
+    x:Math.floor(Math.random() * (cvsX / SIZE_X)),
+    y:Math.floor(Math.random() * (cvsY / SIZE_Y))
+};
+
+function drawItem() { //아이템 그리는 함수
+    ctx.fillStyle = "pink";
+    ctx.fillRect(item.x * SIZE_X, item.y * SIZE_X, SIZE_Y, SIZE_Y);
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(item.x * SIZE_X, item.y * SIZE_X, SIZE_Y, SIZE_Y);
+}
+
 function getDirection(event) { //키보드 방향키에 따라 direction의 값을 바꿔준다.
     if(event.keyCode === 37 && direction !== "right") {
         direction = "left";
@@ -47,10 +59,20 @@ function drawPlayer() { //플레이어의 몸체를 그리는 함수
         draw(player[i].x, player[i].y);
     }
 
-    player.pop();
+    drawItem();
 
     let headX = player[0].x;
     let headY = player[0].y;
+
+    if(headX === item.x && headY === item.y) { //플레이어와 아이템이 충돌 시
+        item = { //아이템 객체 새롭게 얻어옴
+            x:Math.floor(Math.random() * (cvsX / SIZE_X)),
+            y:Math.floor(Math.random() * (cvsY / SIZE_Y))
+        };
+        drawItem(); //새로운 위치에 아이템 그려줌
+    } else {
+        player.pop();
+    }
 
     if(headX < 0 || headX >= cvsX / SIZE_X || headY < 0 || headY >= cvsY / SIZE_Y) { //플레이어 화면 밖으로 나갈 시
         location.reload(); //게임오버 후 location.reload를 이용해 초기위치로 이동시킴
