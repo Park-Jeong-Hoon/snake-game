@@ -52,6 +52,10 @@ function drawPlayer() { //플레이어의 몸체를 그리는 함수
     let headX = player[0].x;
     let headY = player[0].y;
 
+    if(headX < 0 || headX >= cvsX / SIZE_X || headY < 0 || headY >= cvsY / SIZE_Y) { //플레이어 화면 밖으로 나갈 시
+        location.reload(); //게임오버 후 location.reload를 이용해 초기위치로 이동시킴
+    }
+
     //direction 값에 따라 방향이 바뀌도록 한다.
     if(direction === "right") {
         headX++;
