@@ -8,11 +8,11 @@ const cvsY = canvas.height; //캔버스의 세로
 let player = []; //플레이어(snake)의 몸체의 위치에 대한 좌표 객체를 담는 배열
 const SIZE_X = 20; //플레이어나 아이템의 몸체를 이루는 정사각형의 가로
 const SIZE_Y = 20; //플레이어나 아이템의 몸체를 이루는 정사각형의 세로
-let len = 3; //초기 배열의 크기
 
+let len = 1; //초기 배열의 크기
 let direction = "right"; //초기 플레이어의 움직임 방향
+let score = 1;
 
-let score = 3;
 scoreBoard.innerText = `score: ${score}`;
 
 let item = { //아이템의 좌표를 계산하는데 이용될 객체
