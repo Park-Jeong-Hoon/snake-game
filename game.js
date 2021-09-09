@@ -51,6 +51,15 @@ function draw(x, y) { //정사각형 하나 그리는 함수
     ctx.strokeRect(x * SIZE_X, y * SIZE_X, SIZE_Y, SIZE_Y);
 }
 
+function selfCollision(headX, headY) { //플레이어의 몸체끼리 부딪힐 경우
+    for(let i = 0; i < player.length; i++) {
+        if(headX === player[i].x && headY === player[i].y) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function drawPlayer() { //플레이어의 몸체를 그리는 함수
     ctx.clearRect(0, 0, cvsX, cvsY);
     
@@ -74,10 +83,6 @@ function drawPlayer() { //플레이어의 몸체를 그리는 함수
         player.pop();
     }
 
-    if(headX < 0 || headX >= cvsX / SIZE_X || headY < 0 || headY >= cvsY / SIZE_Y) { //플레이어 화면 밖으로 나갈 시
-        location.reload(); //게임오버 후 location.reload를 이용해 초기위치로 이동시킴
-    }
-
     //direction 값에 따라 방향이 바뀌도록 한다.
     if(direction === "right") {
         headX++;
@@ -88,6 +93,11 @@ function drawPlayer() { //플레이어의 몸체를 그리는 함수
     } else if(direction ==="down") {
         headY++;
     };
+
+    if(headX < 0 || headX >= cvsX / SIZE_X || headY < 0 || headY >= cvsY / SIZE_Y || selfCollision(headX, headY)) {
+        //플레이어 화면 밖으로 나거나 플레이어의 몸체끼리 부딪히는 경우
+        location.reload(); //게임오버 후 location.reload를 이용해 초기위치로 이동시킴
+    }
 
     let head = { //플레이어 몸체의 가장 앞부분
         x:headX,
