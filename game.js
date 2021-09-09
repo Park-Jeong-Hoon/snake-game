@@ -1,5 +1,6 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const scoreBoard = document.getElementById("score");
 
 const cvsX = canvas.width; //캔버스의 가로
 const cvsY = canvas.height; //캔버스의 세로
@@ -10,6 +11,9 @@ const SIZE_Y = 20; //플레이어나 아이템의 몸체를 이루는 정사각�
 let len = 3; //초기 배열의 크기
 
 let direction = "right"; //초기 플레이어의 움직임 방향
+
+let score = 3;
+scoreBoard.innerText = `score: ${score}`;
 
 let item = { //아이템의 좌표를 계산하는데 이용될 객체
     x:Math.floor(Math.random() * (cvsX / SIZE_X)),
@@ -60,7 +64,7 @@ function selfCollision(headX, headY) { //플레이어의 몸체끼리 부딪힐 
     return false;
 }
 
-function drawPlayer() { //플레이어의 몸체를 그리는 함수
+function drawPlayer() { //플레이어의 몸체와 플레이어가 게임을 하는데 필요한 요소들을 그리는 함수
     ctx.clearRect(0, 0, cvsX, cvsY);
     
     for(let i = 0; i < player.length; i++) {
@@ -79,6 +83,8 @@ function drawPlayer() { //플레이어의 몸체를 그리는 함수
             y:Math.floor(Math.random() * (cvsY / SIZE_Y))
         };
         drawItem(); //새로운 위치에 아이템 그려줌
+        score++;
+        scoreBoard.innerText = `score: ${score}`;
     } else {
         player.pop();
     }
