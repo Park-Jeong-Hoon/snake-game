@@ -21,9 +21,9 @@ let item = { //아이템의 좌표를 계산하는데 이용될 객체
 };
 
 function drawItem() { //아이템 그리는 함수
-    ctx.fillStyle = "pink";
+    ctx.fillStyle = "#f368e0";
     ctx.fillRect(item.x * SIZE_X, item.y * SIZE_X, SIZE_Y, SIZE_Y);
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = "#bdc3c7";
     ctx.strokeRect(item.x * SIZE_X, item.y * SIZE_X, SIZE_Y, SIZE_Y);
 }
 
@@ -48,10 +48,10 @@ for(let i = len - 1; i >= 0; i--) { //초기 배열의 크기만큼 좌표에 �
     });
 };
 
-function draw(x, y) { //정사각형 하나 그리는 함수
-    ctx.fillStyle = "white";
+function draw(x, y, color) { //정사각형 하나 그리는 함수
+    ctx.fillStyle = color;
     ctx.fillRect(x * SIZE_X, y * SIZE_X, SIZE_Y, SIZE_Y);
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = "#bdc3c7";
     ctx.strokeRect(x * SIZE_X, y * SIZE_X, SIZE_Y, SIZE_Y);
 }
 
@@ -68,14 +68,15 @@ function drawPlayer() { //플레이어의 몸체와 플레이어가 게임을 �
     ctx.clearRect(0, 0, cvsX, cvsY);
     
     for(let i = 0; i < player.length; i++) {
-        ctx.fillStyle = "white";
-        draw(player[i].x, player[i].y);
+        draw(player[i].x, player[i].y, "white");
     }
 
     drawItem();
 
     let headX = player[0].x;
     let headY = player[0].y;
+
+    draw(headX, headY, "#3498db")
 
     if(headX === item.x && headY === item.y) { //플레이어와 아이템이 충돌 시
         item = { //아이템 객체 새롭게 얻어옴
