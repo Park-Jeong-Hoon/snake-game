@@ -1,0 +1,12 @@
+#canvas {
+    background-color: #bdc3c7;
+    display: block;
+}
+
+#score {
+    background-color: slategray;
+    display: inline;
+    color: white;
+    text-align: center;
+    font-size: x-large;
+}
